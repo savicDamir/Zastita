@@ -11,18 +11,26 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
+import LOGIC.User;
+
 public class MainWindow extends JFrame {
 
 	private JMenu menu;
 	private JMenuBar menuBar;
 	private JMenuItem newKey, importKey, exportKey;
+	private NewKey newKeyPanel;
 	private ImportKey importKeyPanel;
 	private ExportKey exportKeyPanel;
 	private JPanel panel = new JPanel();
+	
+	private User user;
+	
 	public MainWindow() {
-		importKeyPanel = new ImportKey();
-		exportKeyPanel = new ExportKey();
-		//add(importKeyPanel);
+		User user = new User();
+		newKeyPanel = new NewKey(user);
+		importKeyPanel = new ImportKey(user);
+		exportKeyPanel = new ExportKey(user);
+		
 		menuBar = new JMenuBar();
 		menu = new JMenu("menu");
 		
@@ -30,8 +38,7 @@ public class MainWindow extends JFrame {
 
 		newKey = new JMenuItem("Generate new key");
 		newKey.addActionListener(l -> {
-			importKeyPanel.setVisible(false);
-			exportKeyPanel.setVisible(false);
+			setPanel(newKeyPanel);
 		});
 		menu.add(newKey);
 
