@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
+import LOGIC.Key;
 import LOGIC.User;
 
 public class MainWindow extends JFrame {
@@ -65,7 +66,10 @@ public class MainWindow extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		Key.loadAllKeyRings();
+		
 		new MainWindow();
+		
 	}
 	
 	private void setPanel(JPanel panel) {
