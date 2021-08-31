@@ -62,41 +62,5 @@ public class User {
 		keyRing.setSecretKeyRing(keyRingGenerator.generateSecretKeyRing());
 		
 		Key.keyRingList.add(keyRing);
-		
-		Key.storeAllKeyRings();
-/*		KeyPairGenerator generator;
-		try {
-			//java key par koji je samo holder
-			generator = KeyPairGenerator.getInstance("RSA", provider);
-			generator.initialize(keySize);
-	        KeyPair pair = generator.generateKeyPair();
-	        
-	        System.out.println(pair.getPublic());
-	        //sad ide bc key par
-	        PGPKeyPair pgpPair =  new JcaPGPKeyPair(PGPPublicKey.RSA_GENERAL, pair, new Date());
-	       
-	        //sada nam treba key ring
-	        PGPDigestCalculator sha1calc = new JcaPGPDigestCalculatorProviderBuilder().build().get(HashAlgorithmTags.SHA1);
-
-			PGPKeyRingGenerator keyRingGenerator = new PGPKeyRingGenerator(PGPSignature.POSITIVE_CERTIFICATION, pgpPair,
-					name+"<"+email+">", sha1calc, null, null,
-					new JcaPGPContentSignerBuilder(pgpPair.getPublicKey().getAlgorithm(), HashAlgorithmTags.SHA1),
-					new JcePBESecretKeyEncryptorBuilder(PGPEncryptedData.CAST5, sha1calc).setProvider(provider) //ovde ako je sranje provider 
-							.build(password.toCharArray()));
-			
-			
-	        PGPPublicKeyRing publicKey = keyRingGenerator.generatePublicKeyRing();
-	     
-	        BufferedOutputStream buff = new BufferedOutputStream(new FileOutputStream("javni"));
-
-			ArmoredOutputStream privateOut = new ArmoredOutputStream(buff);
-			publicKey.encode(privateOut);
-			privateOut.close();
-			buff.close();
-	     
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-*/
 	}
 }

@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
 
 	private JMenu menu;
 	private JMenuBar menuBar;
-	private JMenuItem newKey, importKey, exportKey;
+	private JMenuItem newKey, importKey, exportKey, save;
 	private NewKey newKeyPanel;
 	private ImportKey importKeyPanel;
 	private ExportKey exportKeyPanel;
@@ -31,6 +31,7 @@ public class MainWindow extends JFrame {
 		newKeyPanel = new NewKey(user);
 		importKeyPanel = new ImportKey(user);
 		exportKeyPanel = new ExportKey(user);
+		setPanel(exportKeyPanel);
 		
 		menuBar = new JMenuBar();
 		menu = new JMenu("menu");
@@ -51,10 +52,16 @@ public class MainWindow extends JFrame {
 		
 		exportKey = new JMenuItem("Export key");
 		exportKey.addActionListener(l -> {
+			exportKeyPanel = new ExportKey(user);
 			setPanel(exportKeyPanel);
 		});
-		
 		menu.add(exportKey);
+		
+		save = new JMenuItem("Save");
+		save.addActionListener(l ->{
+			Key.storeAllKeyRings();
+		});
+		menu.add(save);
 		
 		setJMenuBar(menuBar);
         setVisible(true);

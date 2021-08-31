@@ -161,10 +161,51 @@ public class Key {
 	}
 	
 	public static List<Pair<Long, String>> getAllKeyRing(){
-		List<Pair<Long, String>> lista = null;
+		List<Pair<Long, String>> lista = new ArrayList<Pair<Long, String>>();
 		for (KeyRing k : keyRingList) {
 			lista.add(k.getIds());
 		}
 		return lista;
+	}
+	public static int numberOfKeys() {
+		return keyRingList.size();
+	}
+	
+	public static void deleteKey(Long id) {
+		for (KeyRing k : keyRingList) {
+			if (k.getKeyId().equals(id))
+				keyRingList.remove(k);
+		}
+	}
+	
+	public static boolean deleteKeyPassword(Long id, String password) {
+		for (KeyRing k : keyRingList) {
+			if (k.getKeyId().equals(id)) {
+				if (k.matchPassword(password)){
+					keyRingList.remove(k);
+					return true;
+				}
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean exportPublicKey(Long id) {
+		for (KeyRing k : keyRingList) {
+			if (k.getKeyId().equals(id)) {
+				return k.exportPublicKey(); 
+			}
+		}
+		return false;
+	}
+	
+	public static boolean exportSecretKey(Long id) {
+		for (KeyRing k : keyRingList) {
+			if (k.getKeyId().equals(id)) {
+				return k.exportSecretKey();
+			}
+		}
+		return false;
 	}
 }
